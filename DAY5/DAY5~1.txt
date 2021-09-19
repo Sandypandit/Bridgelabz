@@ -1,0 +1,41 @@
+1.Use Random Function (( RANDOM )) to get Single Digit
+ans. echo $((RANDOM % 10))
+
+2. Use Random to get Dice Number between 1 to 6
+Ans. echo $(( (RANDOM % 6) + 1))
+
+3. Add two Random Dice Number and Print the Result.
+Ans.    d1=$(( (RANDOM % 6) + 1))
+	d2=$(( (RANDOM % 6) + 1))
+	sum=$((d1+d2))
+	echo $sum
+
+4. Write a program that reads 5 Random 2 Digit values , then find their sum and the average
+Ans. 
+	echo "How many numbers"
+	read N
+	x=1
+	sum=0
+	while [ $x -le $N ]
+	  do
+  	    num= shuf -i 10-99 -n 1
+  	    sum=$(( sum + num1 ))
+  	    x=$((x + 1))
+	  done
+	avg1=$(( $sum / $N ))
+	echo $avg1
+
+
+5. Unit Conversion
+
+a. 1ft = 12 in then 42 in = ? ft
+
+	echo "INCH TO FEET"
+	echo "enter inches"
+	read inch
+	feet=$(( $inch / 12 ))
+	echo "Total feet is : $feet "
+
+
+b. Rectangular Plot of 60 feet x 40 feet in meters
+c. Calculate area of 25 such plots in acres

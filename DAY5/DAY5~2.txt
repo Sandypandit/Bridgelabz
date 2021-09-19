@@ -1,0 +1,197 @@
+1.Write a program that reads 5 Random 3 Digit values and then outputs the minimum
+and the maximum value.
+ans. 
+	min_number() {
+	    printf "%s\n" "$@" | sort -g | head -n1 #sort -g/n compares the value
+	}
+
+	max_number() {
+	    printf "%s\n" "$@" | sort -nr | head -n1 #sort -gr/nr reverses it
+	}
+
+	while true; do b=$((RANDOM %1000)); if [ $b -gt 100 ] && [ $b -lt 999 ]; then break; fi; done
+	echo $b
+
+	while true; do c=$((RANDOM %1000)); if [ $b -gt 100 ] && [ $b -lt 999 ]; then break; fi; done
+	echo $c
+
+	while true; do d=$((RANDOM %1000)); if [ $b -gt 100 ] && [ $b -lt 999 ]; then break; fi; done
+	echo $d
+
+	while true; do e=$((RANDOM %1000)); if [ $b -gt 100 ] && [ $b -lt 999 ]; then break; fi; done
+	echo $e
+		
+	while true; do f=$((RANDOM %1000)); if [ $b -gt 100 ] && [ $b -lt 999 ]; then break; fi; done
+	echo $f
+	echo "******"
+	
+	min="$(min_number $b $c $d $e $f)"
+	echo "Your minimum value is: " $min
+	
+	max="$(max_number $b $c $d $e $f)"
+	echo "Your maximum value is: " $max
+
+__________________________________________________________________________
+
+2. Write a program that takes day and month from the command line and prints true if 
+day of month is between March 20 and June 20, false otherwise.
+ANS ---
+echo "Enter day"
+read day
+echo "Enter month"
+read month
+
+if [ $day -gt 0 ] && [ $day -lt 32 ] && [ $month -gt 2 ] && [ $month -lt 7 ]
+  then
+    echo true
+else
+    echo false
+fi
+
+__________________________________________________________________________
+
+3. Write a program that takes a year as input and outputs the Year is a Leap Year or not a Leap Year.
+   A Leap Year checks for 4 Digit Number, Divisible by 4 and not 100 unless
+   divisible by 400.
+ANS --
+
+echo "Enter any year"
+read leap
+
+if [ $(( $leap % 4 )) -eq 0 ] && [ $(( $leap % 400 )) -eq 0]
+  then
+   echo "Leap Year"
+else
+   echo "not a leap year"
+fi
+
+__________________________________________________________________________
+
+4. Write a program to simulate a coin flip and print out "Heads" or "Tails" accordingly.
+
+ANS ---
+echo "Flipping the coin"
+sleep 3
+coin=$((RANDOM %3))
+#echo $coin
+
+if [ $coin -eq 1 ]
+  then 
+   echo "It's heads"
+elif [ $coin -eq 2 ]
+  then 
+   echo "It's tails"
+else 
+   echo "It's a tie"
+fi
+
+___________________________________________________________________________
+
+Selection Practice Problems with if, elif and else
+
+a) Read a single digit number and write the number in word
+ANS -- 
+echo "Enter any single digit number"
+read num
+
+if [ $num -eq 1 ]; then echo "one"
+elif [ $num -eq 2 ]; then echo "two"
+elif [ $num -eq 3 ]; then echo "three"
+elif [ $num -eq 4 ]; then echo "four"
+elif [ $num -eq 5 ]; then echo "five"
+elif [ $num -eq 6 ]; then echo "six"
+elif [ $num -eq 7 ]; then echo "seven"
+elif [ $num -eq 8 ]; then echo "eight"
+elif [ $num -eq 9 ]; then echo "nine"
+elif [ $num -eq 0 ]; then echo "zero"
+else echo "Only single digit"
+fi
+
+^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_
+
+b) Read a Number and Display the week day (Sunday, Monday,...)
+ANS --
+echo "Enter number to know its equivalent week(1 to 7)"
+read day
+
+if [ $day -eq 1 ]; then echo "Monday"
+elif [ $day -eq 2 ]; then echo "Tuesday"
+elif [ $day -eq 3 ]; then echo "Wednesday"
+elif [ $day -eq 4 ]; then echo "Thursday"
+elif [ $day -eq 5 ]; then echo "Friday"
+elif [ $day -eq 6 ]; then echo "Saturday"
+elif [ $day -eq 7 ]; then echo "Sunday"
+else echo "Invalid day"
+fi
+
+^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_
+
+c) Read a Number 1, 10, 100, 1000, etc and display unit, ten, hundred,...
+ANS--
+echo "Enter numbers like 1, 10, 100, 1000, etc"
+read num
+
+if [ $num -eq 1 ]; then echo "Units (Once)"
+elif [ $num -eq 10 ]; then echo "Tens (Tence)"
+elif [ $num -eq 100 ]; then echo "Hundreds"
+elif [ $num -eq 1000 ]; then echo "Thousands"
+elif [ $num -eq 10000 ]; then echo "Tens of Thousands"
+elif [ $num -eq 100000 ]; then echo "Hundreds of Thousands"
+elif [ $num -eq 1000000 ]; then echo "Millions"
+elif [ $num -eq 1000000000 ]; then echo "Billions"
+else echo "Invalid number"
+fi
+
+^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_
+
+d) Enter 3 Numbers do following arithmetic operation and find the one that
+
+is maximum and minimum
+1. a + b * c 3. c + a / b
+2. a % b + c 4. a * b + c
+
+ANS ---
+echo "Enter Three numbers"
+echo "Number one(a)"
+read a
+echo "Number two(b)"
+read b
+echo "Number three(c)"
+read c
+
+min_number() {
+	    printf "%s\n" "$@" | sort -g | head -n1 #sort -g/n compares the value
+	}
+
+max_number() {
+	    printf "%s\n" "$@" | sort -nr | head -n1 #sort -gr/nr reverses it
+	}
+
+v1=$(( $a + $b * $c ))
+v2=$(( $a % $b + $c ))
+v3=$(( $c + $a / $b ))
+v4=$(( $a * $b + $c ))
+
+echo "1. a($a) + b($b) x c($c) = " $v1
+echo "2. a($a) % b($b) + c($c) = " $v2
+echo "3. c($c) + a($a) / b($b) = " $v3
+echo "4. a($a) x b($b) + c($c) = " $v4
+echo "_____________________"
+
+min="$(min_number $v1 $v2 $v3 $v4)"
+	echo "Your minimum value is: " $min
+	
+max="$(max_number $v1 $v2 $v3 $v4)"
+	echo "Your maximum value is: " $max
+__________________________________________________________________________________________
+
+@)Selection Practice Problems with case statement
+
+1. Read a single digit number and write the number in word using Case
+2. Read a Number and Display the week day (Sunday, Monday,...)
+3. Read a Number 1, 10, 100, 1000, etc and display unit, ten, hundred,...
+4. Write a program that takes User Inputs and does Unit Conversion of
+
+different Length units
+1. Feet to Inch 3. Inch to Feet
+2. Feet to Meter 4. Meter to Feet

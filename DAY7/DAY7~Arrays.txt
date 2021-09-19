@@ -1,0 +1,121 @@
+Arrays Practice Problems
+
+1. Write a program in the following steps
+a. Generates 10 Random 3 Digit number.
+b. Store this random numbers into a array.
+c. Then find the 2nd largest and the 2nd smallest element without sorting the array.
+ANS --
+
+table=()
+for ((i=0; i<10; i++))
+ do
+  while true; do a=$((RANDOM %1000)); if [ $a -gt 100 ] && [ $a -lt 999 ]; then break; fi; done
+  echo "Random no. $((i+1)) = " $a
+  table+=( $a )
+done
+echo "********************************"
+echo "Array = ${table[@]}"
+echo "********************************"
+max_number() {
+	    printf "%s\n" "$@" | sort -nr | head -n1 #sort -gr/nr reverses it
+	}
+delete="$(max_number ${table[@]})"
+table=( "${table[@]/$delete}" )
+
+min_number() {
+	    printf "%s\n" "$@" | sort -g | head -n1 #sort -g/n compares the value
+	}
+delete="$(min_number ${table[@]})"
+table=( "${table[@]/$delete}" )
+
+min="$(min_number ${table[@]})"
+echo "Your 2nd smallest value is: " $min
+	
+max="$(max_number ${table[@]})"
+echo "Your 2nd largest value is: " $max
+
+________________________________________________________________________________________________________
+
+2. Extend the above program to sort the array and then find the 2nd largest
+and the 2nd smallest element.
+
+3. Extend the Prime Factorization Program to store all the Prime Factors of a
+number n into an array and finally display the output.
+ANS--
+echo "enter an integer:"
+read input
+# find factors and prime
+primeFactors=()
+i=2
+count=0
+flag=0
+for ((i;i<$input;));do
+    
+  if [ `expr $input % $i` -eq 0 ];then
+      factor=$i
+
+  for ((j=2;j<=`expr $factor / 2`;));do
+      flag=0
+      if [ `expr $factor % $j` -eq 0 ];then
+      flag=1
+      break
+      fi
+      j=`expr $j + 1`
+  done
+  if [ $flag -eq 0 ];then
+  #echo "[ $factor ]"
+  primeFactors+=( $factor )
+  count=1
+  fi
+  fi
+  i=`expr $i + 1`
+  done
+  echo " "
+  echo "The prime factors of $input are ${primeFactors[@]}"
+  if [ $count -eq 0 ];then
+  echo "no prime factors found except 1 and $input"
+  fi
+
+_______________________________________________________________________________________________________________
+
+4. Write a Program to show Sum of three Integer adds to ZERO
+ANS --
+
+arr=(-1 0 1 2 -1 -4)
+n=${#arr[@]}
+
+echo ${arr[@]}
+zeroTriplet=()
+
+for ((i=0; i<$((n-2)); i++))
+ do
+  for ((x=$((i+1)); x<$((n-1)); x++))
+   do
+    for ((k=$((x+1)); k<$n; k++))
+     do
+	if [ $((${arr[$i]}+${arr[$x]}+${arr[$k]})) == 0 ]
+	 then
+	  zeroTriplet+=( ${arr[$i]} ${arr[$x]} ${arr[$k]} )
+	  echo "Triplets with zero sum are "${zeroTriplet[@]}
+	  unset zeroTriplet
+	fi
+     done
+   done
+ done
+
+_____________________________________________________________________________________________________________
+
+5. Take a range from 0 – 100, find the digits that are repeated twice like 33, 77,
+etc and store them in an array
+ANS --
+
+arr=()
+for ((i=10;i<100;i++))
+ do
+  if [ $i -eq $(echo $i | rev) ]
+then
+   arr+=( $i )
+fi
+done
+
+echo "all repeatative digits between 1 to 100 are " ${arr[@]}
